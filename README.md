@@ -1,4 +1,4 @@
-# Rust Max44009 Ambient Light Sensor [![crates.io](https://img.shields.io/crates/v/max44009.svg)](https://crates.io/crates/max44009) [![Docs](https://docs.rs/max44009/badge.svg)](https://docs.rs/max44009)
+# Rust Max44009 Ambient Light Sensor [![crates.io](https://img.shields.io/crates/v/max44009.svg)](https://crates.io/crates/max44009) [![Docs](https://docs.rs/max44009/badge.svg)](https://docs.rs/max44009) [![Build Status](https://travis-ci.org/eldruin/max44009-rs.svg?branch=master)](https://travis-ci.org/eldruin/max44009-rs)
 
 This is a platform agnostic Rust driver for the MAX44009 ambient
 light sensor, based on the
