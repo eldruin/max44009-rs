@@ -7,7 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-...
+### Added
+- Setting the configuration mode.
+- Setting the integration time.
+- Setting the current division ratio.
+- Reading the integration time.
+- Reading the current division ratio.
+- Enabling/disabling interrupt generation.
+- Checking if an interrupt has happened.
 
 ## 0.1.0 - 2018-10-19
 
