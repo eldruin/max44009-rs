@@ -8,7 +8,7 @@
 //! - Set the measurement mode.
 //! - Set the configuration mode.
 //! - Set the integration time.
-//! - Select the current division.
+//! - Set the current division ratio.
 //! - Read the integration time.
 //! - Read the current division ratio.
 //! - Enable/disable interrupt generation.
