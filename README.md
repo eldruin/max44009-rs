@@ -7,6 +7,13 @@ light sensor, based on the
 This driver allows you to:
 - Read lux measurement.
 - Set the measurement mode.
+- Set the configuration mode.
+- Set the integration time.
+- Select the current division.
+- Read the integration time.
+- Read the current division ratio.
+- Enable/disable interrupt generation.
+- Check if an interrupt has happened.
 
 ## The device
 The MAX44009 ambient light sensor features an I2C digital output
