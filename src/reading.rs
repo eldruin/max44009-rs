@@ -75,12 +75,12 @@ mod tests {
 
     #[test]
     fn can_convert_to_lux() {
-        assert_eq!(      0.045, convert_to_lux(0b0000_0000, 0b0000_0001));
-        assert_eq!(      0.72,  convert_to_lux(0b0000_0001, 0b0000_0000));
-        assert_near(     1.53,  convert_to_lux(0b0001_0001, 0b0000_0001), 0.001);
-        assert_near(188006.0,   convert_to_lux(0b1110_1111, 0b0000_1111), 0.5);
-        assert_near(187269.0,   convert_to_lux(0b1110_1111, 0b0000_1110), 0.5);
-        assert_near(176947.0,   convert_to_lux(0b1110_1111, 0b0000_0000), 0.5);
-        assert_near(165151.0,   convert_to_lux(0b1110_1110, 0b0000_0000), 0.5);
+        assert_near(    0.045, convert_to_lux(0b0000_0000, 0b0000_0001), 0.001);
+        assert_near(     0.72, convert_to_lux(0b0000_0001, 0b0000_0000), 0.001);
+        assert_near(     1.53, convert_to_lux(0b0001_0001, 0b0000_0001), 0.001);
+        assert_near(188_006.0, convert_to_lux(0b1110_1111, 0b0000_1111), 0.5);
+        assert_near(187_269.0, convert_to_lux(0b1110_1111, 0b0000_1110), 0.5);
+        assert_near(176_947.0, convert_to_lux(0b1110_1111, 0b0000_0000), 0.5);
+        assert_near(165_151.0, convert_to_lux(0b1110_1110, 0b0000_0000), 0.5);
     }
 }
