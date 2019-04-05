@@ -25,7 +25,7 @@ fn can_read_interrupt_happened() {
 fn can_read_lux() {
     let mut dev = setup(&[0, 1]);
     let lux = dev.read_lux().unwrap();
-    assert_eq!(0.045, lux);
+     assert!((lux - 0.045).abs() < 0.001);
     check_sent_data(dev, &[Register::LUX_HIGH]);
 }
 
