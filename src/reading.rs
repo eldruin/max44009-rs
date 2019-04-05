@@ -62,7 +62,7 @@ where
 fn convert_to_lux(msb: u8, lsb: u8) -> f32 {
     let mantissa = (msb & 0x0F) << 4 | (lsb & 0x0F);
     let exp = (msb & 0xF0) >> 4;
-    (((1 as u32) << exp) * mantissa as u32) as f32 * 0.045
+    (((1_u32) << exp) * u32::from(mantissa)) as f32 * 0.045
 }
 
 #[cfg(test)]
