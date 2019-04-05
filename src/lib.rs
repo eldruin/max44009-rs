@@ -160,7 +160,7 @@ pub enum Error<E> {
     I2C(E),
     /// A manual-configuration-mode-only was attempted while in automatic
     /// configuration mode.
-    OperationNotAvailable
+    OperationNotAvailable,
 }
 
 /// Measurement mode
@@ -176,7 +176,7 @@ pub enum MeasurementMode {
     /// Continuously measures lux intensity. As soon as a reading finishes,
     /// the next one begins. The actual cadence depends on the integration
     /// time selected.
-    Continuous
+    Continuous,
 }
 
 /// Configuration mode
@@ -191,7 +191,7 @@ pub enum ConfigurationMode {
     ///
     /// The user can select the integration time and the current division
     /// ratio manually.
-    Manual
+    Manual,
 }
 
 /// Integration time
@@ -212,7 +212,7 @@ pub enum IntegrationTime {
     /// 400ms
     _400ms,
     /// 800ms. (Preferred mode for boosting low-light sensitivity)
-    _800ms
+    _800ms,
 }
 
 /// Current division ratio
@@ -226,7 +226,7 @@ pub enum CurrentDivisionRatio {
     ///
     /// Only 1/8 of the photodiode current goes to the ADC. This mode is used in
     /// high-brightness situations.
-    OneEighth
+    OneEighth,
 }
 
 /// Possible slave addresses
@@ -235,7 +235,7 @@ pub enum SlaveAddr {
     /// Default slave address
     Default,
     /// Alternative slave address providing bit value for A0
-    Alternative(bool)
+    Alternative(bool),
 }
 
 impl Default for SlaveAddr {
@@ -249,7 +249,7 @@ impl SlaveAddr {
     fn addr(self, default: u8) -> u8 {
         match self {
             SlaveAddr::Default => default,
-            SlaveAddr::Alternative(a0) => default | a0 as u8
+            SlaveAddr::Alternative(a0) => default | a0 as u8,
         }
     }
 }
@@ -259,18 +259,18 @@ const DEVICE_BASE_ADDRESS: u8 = 0b100_1010;
 struct Register;
 
 impl Register {
-    const INT_STATUS        : u8 = 0x00;
-    const INT_ENABLE        : u8 = 0x01;
-    const CONFIGURATION     : u8 = 0x02;
-    const LUX_HIGH          : u8 = 0x03;
+    const INT_STATUS: u8 = 0x00;
+    const INT_ENABLE: u8 = 0x01;
+    const CONFIGURATION: u8 = 0x02;
+    const LUX_HIGH: u8 = 0x03;
 }
 
 struct BitFlags;
 
 impl BitFlags {
-    const CONTINUOUS : u8 = 0b1000_0000;
-    const MANUAL     : u8 = 0b0100_0000;
-    const CDR        : u8 = 0b0000_1000;
+    const CONTINUOUS: u8 = 0b1000_0000;
+    const MANUAL: u8 = 0b0100_0000;
+    const CDR: u8 = 0b0000_1000;
 }
 
 /// MAX44009 ambient light sensor driver.
@@ -289,14 +289,14 @@ mod reading;
 
 impl<I2C, E> Max44009<I2C>
 where
-    I2C: i2c::Write<Error = E>
+    I2C: i2c::Write<Error = E>,
 {
     /// Create new instance of the Max44009 device.
     pub fn new(i2c: I2C, address: SlaveAddr) -> Self {
         Max44009 {
             i2c,
             address: address.addr(DEVICE_BASE_ADDRESS),
-            config: 0
+            config: 0,
         }
     }
 
@@ -318,7 +318,13 @@ mod tests {
 
     #[test]
     fn can_generate_alternative_addresses() {
-        assert_eq!(0b100_1010, SlaveAddr::Alternative(false).addr(DEVICE_BASE_ADDRESS));
-        assert_eq!(0b100_1011, SlaveAddr::Alternative(true ).addr(DEVICE_BASE_ADDRESS));
+        assert_eq!(
+            0b100_1010,
+            SlaveAddr::Alternative(false).addr(DEVICE_BASE_ADDRESS)
+        );
+        assert_eq!(
+            0b100_1011,
+            SlaveAddr::Alternative(true).addr(DEVICE_BASE_ADDRESS)
+        );
     }
 }

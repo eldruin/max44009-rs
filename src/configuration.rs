@@ -1,11 +1,13 @@
 extern crate embedded_hal as hal;
+use super::{
+    BitFlags, ConfigurationMode, CurrentDivisionRatio, Error, IntegrationTime, Max44009,
+    MeasurementMode, Register,
+};
 use hal::blocking::i2c;
-use super::{ Max44009, Register, BitFlags, MeasurementMode, ConfigurationMode,
-             IntegrationTime, CurrentDivisionRatio, Error };
 
 impl<I2C, E> Max44009<I2C>
 where
-    I2C: i2c::Write<Error = E>
+    I2C: i2c::Write<Error = E>,
 {
     /// Enable interrupt.
     ///
@@ -28,7 +30,7 @@ where
         let config = self.config;
         match mode {
             MeasurementMode::OnceEvery800ms => self.write_config(config & !BitFlags::CONTINUOUS),
-            MeasurementMode::Continuous     => self.write_config(config |  BitFlags::CONTINUOUS)
+            MeasurementMode::Continuous => self.write_config(config | BitFlags::CONTINUOUS),
         }
     }
 
@@ -37,7 +39,7 @@ where
         let config = self.config;
         match mode {
             ConfigurationMode::Automatic => self.write_config(config & !BitFlags::MANUAL),
-            ConfigurationMode::Manual    => self.write_config(config |  BitFlags::MANUAL)
+            ConfigurationMode::Manual => self.write_config(config | BitFlags::MANUAL),
         }
     }
 
@@ -46,24 +48,27 @@ where
         self.assert_is_in_manual_mode()?;
         let config = self.config & 0b1111_1000;
         match it {
-            IntegrationTime::_800ms  => self.write_config(config),
-            IntegrationTime::_400ms  => self.write_config(config | 0x01),
-            IntegrationTime::_200ms  => self.write_config(config | 0x02),
-            IntegrationTime::_100ms  => self.write_config(config | 0x03),
-            IntegrationTime::_50ms   => self.write_config(config | 0x04),
-            IntegrationTime::_25ms   => self.write_config(config | 0x05),
+            IntegrationTime::_800ms => self.write_config(config),
+            IntegrationTime::_400ms => self.write_config(config | 0x01),
+            IntegrationTime::_200ms => self.write_config(config | 0x02),
+            IntegrationTime::_100ms => self.write_config(config | 0x03),
+            IntegrationTime::_50ms => self.write_config(config | 0x04),
+            IntegrationTime::_25ms => self.write_config(config | 0x05),
             IntegrationTime::_12_5ms => self.write_config(config | 0x06),
             IntegrationTime::_6_25ms => self.write_config(config | 0x07),
         }
     }
 
     /// Set current division ratio. (Only in manual configuration mode).
-    pub fn set_current_division_ratio(&mut self, cdr: CurrentDivisionRatio) -> Result<(), Error<E>> {
+    pub fn set_current_division_ratio(
+        &mut self,
+        cdr: CurrentDivisionRatio,
+    ) -> Result<(), Error<E>> {
         self.assert_is_in_manual_mode()?;
         let config = self.config;
         match cdr {
-            CurrentDivisionRatio::One       => self.write_config(config & !BitFlags::CDR),
-            CurrentDivisionRatio::OneEighth => self.write_config(config |  BitFlags::CDR)
+            CurrentDivisionRatio::One => self.write_config(config & !BitFlags::CDR),
+            CurrentDivisionRatio::OneEighth => self.write_config(config | BitFlags::CDR),
         }
     }
 

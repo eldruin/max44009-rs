@@ -1,11 +1,10 @@
 extern crate embedded_hal as hal;
+use super::{BitFlags, CurrentDivisionRatio, Error, IntegrationTime, Max44009, Register};
 use hal::blocking::i2c;
-use super::{ Max44009, Register, BitFlags, IntegrationTime,
-             CurrentDivisionRatio, Error };
 
 impl<I2C, E> Max44009<I2C>
 where
-    I2C: i2c::WriteRead<Error = E>
+    I2C: i2c::WriteRead<Error = E>,
 {
     /// Reads whether an interrupt has happened.
     pub fn has_interrupt_happened(&mut self) -> Result<bool, Error<E>> {
@@ -40,7 +39,7 @@ where
             5 => Ok(IntegrationTime::_25ms),
             6 => Ok(IntegrationTime::_12_5ms),
             7 => Ok(IntegrationTime::_6_25ms),
-            _ => panic!("Programming error!")
+            _ => panic!("Programming error!"),
         }
     }
 
@@ -52,8 +51,7 @@ where
             .map_err(Error::I2C)?;
         if (config[0] & BitFlags::CDR) == 0 {
             Ok(CurrentDivisionRatio::One)
-        }
-        else {
+        } else {
             Ok(CurrentDivisionRatio::OneEighth)
         }
     }
@@ -75,9 +73,9 @@ mod tests {
 
     #[test]
     fn can_convert_to_lux() {
-        assert_near(    0.045, convert_to_lux(0b0000_0000, 0b0000_0001), 0.001);
-        assert_near(     0.72, convert_to_lux(0b0000_0001, 0b0000_0000), 0.001);
-        assert_near(     1.53, convert_to_lux(0b0001_0001, 0b0000_0001), 0.001);
+        assert_near(0.045, convert_to_lux(0b0000_0000, 0b0000_0001), 0.001);
+        assert_near(0.72, convert_to_lux(0b0000_0001, 0b0000_0000), 0.001);
+        assert_near(1.53, convert_to_lux(0b0001_0001, 0b0000_0001), 0.001);
         assert_near(188_006.0, convert_to_lux(0b1110_1111, 0b0000_1111), 0.5);
         assert_near(187_269.0, convert_to_lux(0b1110_1111, 0b0000_1110), 0.5);
         assert_near(176_947.0, convert_to_lux(0b1110_1111, 0b0000_0000), 0.5);
