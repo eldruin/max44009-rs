@@ -36,7 +36,7 @@ automatically selects the correct lux range to optimize the
 counts/lux.
 
 Datasheet:
-- [MAX44009](https://datasheets.maximintegrated.com/en/ds/Max44009.pdf)
+- [MAX44009](https://datasheets.maximintegrated.com/en/ds/MAX44009.pdf)
 
 ## License
 
