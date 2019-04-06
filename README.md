@@ -38,6 +38,28 @@ counts/lux.
 Datasheet:
 - [MAX44009](https://datasheets.maximintegrated.com/en/ds/MAX44009.pdf)
 
+## Usage
+
+To use this driver, import this crate and an `embedded_hal` implementation,
+then instantiate the appropriate device.
+
+Please find additional examples using hardware in this repository: [driver-examples]
+
+[driver-examples]: https://github.com/eldruin/driver-examples
+
+```rust
+extern crate linux_embedded_hal as hal;
+extern crate max44009;
+use max44009::{Max44009, SlaveAddr};
+
+fn main() {
+    let dev = hal::I2cdev::new("/dev/i2c-1").unwrap();
+    let mut sensor = Max44009::new(dev, SlaveAddr::default());
+    let lux = sensor.read_lux().unwrap();
+    println!("lux: {}", lux);
+}
+```
+
 ## License
 
 Licensed under either of
