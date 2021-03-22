@@ -2,9 +2,8 @@
 
 [![crates.io](https://img.shields.io/crates/v/max44009.svg)](https://crates.io/crates/max44009)
 [![Docs](https://docs.rs/max44009/badge.svg)](https://docs.rs/max44009)
-[![Build Status](https://travis-ci.org/eldruin/max44009-rs.svg?branch=master)](https://travis-ci.org/eldruin/max44009-rs)
+[![Build Status](https://github.com/eldruin/max44009-rs/workflows/Build/badge.svg)](https://github.com/eldruin/max44009-rs/actions?query=workflow%3ABuild)
 [![Coverage Status](https://coveralls.io/repos/github/eldruin/max44009-rs/badge.svg?branch=master)](https://coveralls.io/github/eldruin/max44009-rs?branch=master)
-![Maintenance Intention](https://img.shields.io/badge/maintenance-actively--developed-brightgreen.svg)
 
 This is a platform agnostic Rust driver for the MAX44009 ambient
 light sensor, using the [`embedded-hal`] traits.
