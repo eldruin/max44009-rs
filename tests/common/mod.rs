@@ -14,7 +14,7 @@ impl Register {
     pub const LUX_HIGH: u8 = 0x03;
 }
 
-pub fn setup<'a>(data: &'a [u8]) -> Max44009<hal::I2cMock<'a>> {
+pub fn setup(data: &[u8]) -> Max44009<hal::I2cMock> {
     let mut dev = hal::I2cMock::new();
     dev.set_read_data(&data);
     Max44009::new(dev, SlaveAddr::default())
@@ -23,5 +23,5 @@ pub fn setup<'a>(data: &'a [u8]) -> Max44009<hal::I2cMock<'a>> {
 pub fn check_sent_data(sensor: Max44009<hal::I2cMock>, data: &[u8]) {
     let dev = sensor.destroy();
     assert_eq!(dev.get_last_address(), Some(DEVICE_BASE_ADDRESS));
-    assert_eq!(dev.get_write_data(), &data[..]);
+    assert_eq!(dev.get_write_data(), data);
 }
