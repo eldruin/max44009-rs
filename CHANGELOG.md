@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Checking if an interrupt has happened.
 
 ### Changed
+- [breaking-change] Remove implementing `Default` for `Max44009`.
 - Make types `ConfigurationMode`, `CurrentDivisionRatio`, `IntegrationTime`,
   `MeasurementMode` and `SlaveAddr` implement `Copy`.
 

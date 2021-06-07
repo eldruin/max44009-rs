@@ -149,7 +149,7 @@ impl BitFlags {
 }
 
 /// MAX44009 ambient light sensor driver.
-#[derive(Debug, Default)]
+#[derive(Debug)]
 pub struct Max44009<I2C> {
     /// The concrete I²C device implementation.
     i2c: I2C,
