@@ -1,42 +1,59 @@
 extern crate embedded_hal_mock as hal;
 extern crate max44009;
+use hal::i2c::Transaction as I2cTrans;
 use max44009::{CurrentDivisionRatio as CDR, IntegrationTime as IT};
 
 mod common;
-use common::{check_sent_data, setup, Register};
+use common::{destroy, new, Register, DEV_BASE_ADDR};
 
 #[test]
 fn can_read_interrupt_did_not_happened() {
-    let mut dev = setup(&[0]);
+    let mut dev = new(&[I2cTrans::write_read(
+        DEV_BASE_ADDR,
+        vec![Register::INT_STATUS],
+        vec![0],
+    )]);
     let interrupt_happened = dev.has_interrupt_happened().unwrap();
     assert!(!interrupt_happened);
-    check_sent_data(dev, &[Register::INT_STATUS]);
+    destroy(dev);
 }
 
 #[test]
 fn can_read_interrupt_happened() {
-    let mut dev = setup(&[1]);
+    let mut dev = new(&[I2cTrans::write_read(
+        DEV_BASE_ADDR,
+        vec![Register::INT_STATUS],
+        vec![1],
+    )]);
     let interrupt_happened = dev.has_interrupt_happened().unwrap();
     assert!(interrupt_happened);
-    check_sent_data(dev, &[Register::INT_STATUS]);
+    destroy(dev);
 }
 
 #[test]
 fn can_read_lux() {
-    let mut dev = setup(&[0, 1]);
+    let mut dev = new(&[I2cTrans::write_read(
+        DEV_BASE_ADDR,
+        vec![Register::LUX_HIGH],
+        vec![0, 1],
+    )]);
     let lux = dev.read_lux().unwrap();
     assert!((lux - 0.045).abs() < 0.001);
-    check_sent_data(dev, &[Register::LUX_HIGH]);
+    destroy(dev);
 }
 
 macro_rules! read_param_test {
     ($test_name:ident, $method:ident, $input_data:expr, $enum:ident::$expected_variant:ident) => {
         #[test]
         fn $test_name() {
-            let mut dev = setup(&[$input_data]);
+            let mut dev = new(&[I2cTrans::write_read(
+                DEV_BASE_ADDR,
+                vec![Register::CONFIGURATION],
+                vec![$input_data],
+            )]);
             let it = dev.$method().unwrap();
             assert_eq!($enum::$expected_variant, it);
-            check_sent_data(dev, &[Register::CONFIGURATION]);
+            destroy(dev);
         }
     };
 }

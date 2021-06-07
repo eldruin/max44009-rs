@@ -1,8 +1,9 @@
 extern crate embedded_hal_mock as hal;
 extern crate max44009;
+use hal::i2c::{Mock as I2cMock, Transaction as I2cTrans};
 use max44009::{Max44009, SlaveAddr};
 
-const DEVICE_BASE_ADDRESS: u8 = 0b100_1010;
+pub const DEV_BASE_ADDR: u8 = 0b100_1010;
 
 pub struct Register;
 
@@ -14,14 +15,10 @@ impl Register {
     pub const LUX_HIGH: u8 = 0x03;
 }
 
-pub fn setup(data: &[u8]) -> Max44009<hal::I2cMock> {
-    let mut dev = hal::I2cMock::new();
-    dev.set_read_data(&data);
-    Max44009::new(dev, SlaveAddr::default())
+pub fn new(transactions: &[I2cTrans]) -> Max44009<I2cMock> {
+    Max44009::new(I2cMock::new(transactions), SlaveAddr::default())
 }
 
-pub fn check_sent_data(sensor: Max44009<hal::I2cMock>, data: &[u8]) {
-    let dev = sensor.destroy();
-    assert_eq!(dev.get_last_address(), Some(DEVICE_BASE_ADDRESS));
-    assert_eq!(dev.get_write_data(), data);
+pub fn destroy(dev: Max44009<I2cMock>) {
+    dev.destroy().done();
 }
