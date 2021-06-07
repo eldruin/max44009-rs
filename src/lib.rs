@@ -140,7 +140,7 @@ pub enum Error<E> {
 }
 
 /// Measurement mode
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub enum MeasurementMode {
     /// Once every 800ms mode (default).
     ///
@@ -156,7 +156,7 @@ pub enum MeasurementMode {
 }
 
 /// Configuration mode
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub enum ConfigurationMode {
     /// Automatic mode (default).
     ///
@@ -171,7 +171,7 @@ pub enum ConfigurationMode {
 }
 
 /// Integration time
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub enum IntegrationTime {
     /// 6.25ms. (Only in manual mode)
     _6_25ms,
@@ -192,7 +192,7 @@ pub enum IntegrationTime {
 }
 
 /// Current division ratio
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub enum CurrentDivisionRatio {
     /// No current division (default).
     ///
@@ -206,7 +206,7 @@ pub enum CurrentDivisionRatio {
 }
 
 /// Possible slave addresses
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub enum SlaveAddr {
     /// Default slave address
     Default,

@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Enabling/disabling interrupt generation.
 - Checking if an interrupt has happened.
 
+### Changed
+- Make types `ConfigurationMode`, `CurrentDivisionRatio`, `IntegrationTime`,
+  `MeasurementMode` and `SlaveAddr` implement `Copy`.
+
 ## 0.1.0 - 2018-10-19
 
 This is the initial release to crates.io. All changes will be documented in
