@@ -162,7 +162,7 @@ pub struct Max44009<I2C> {
 mod configuration;
 mod reading;
 mod types;
-pub use types::{
+pub use crate::types::{
     ConfigurationMode, CurrentDivisionRatio, Error, IntegrationTime, MeasurementMode, SlaveAddr,
 };
 
