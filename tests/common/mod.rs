@@ -1,6 +1,4 @@
-extern crate embedded_hal_mock as hal;
-extern crate max44009;
-use hal::i2c::{Mock as I2cMock, Transaction as I2cTrans};
+use embedded_hal_mock::i2c::{Mock as I2cMock, Transaction as I2cTrans};
 use max44009::{Max44009, SlaveAddr};
 
 pub const DEV_BASE_ADDR: u8 = 0b100_1010;

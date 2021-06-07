@@ -47,87 +47,62 @@
 //! the device:
 //!
 //! ```no_run
-//! extern crate linux_embedded_hal as hal;
-//! extern crate max44009;
-//!
-//! use hal::I2cdev;
+//! use linux_embedded_hal::I2cdev;
 //! use max44009::{ Max44009, SlaveAddr };
 //!
-//! # fn main() {
 //! let dev = I2cdev::new("/dev/i2c-1").unwrap();
 //! let address = SlaveAddr::default();
 //! let mut sensor = Max44009::new(dev, address);
 //! let lux = sensor.read_lux().unwrap();
-//! # }
 //! ```
 //!
 //! ### Provide an alternative address
 //!
 //! ```no_run
-//! extern crate linux_embedded_hal as hal;
-//! extern crate max44009;
-//!
-//! use hal::I2cdev;
+//! use linux_embedded_hal::I2cdev;
 //! use max44009::{ Max44009, SlaveAddr };
 //!
-//! # fn main() {
 //! let dev = I2cdev::new("/dev/i2c-1").unwrap();
 //! let a0 = true;
 //! let address = SlaveAddr::Alternative(a0);
 //! let mut sensor = Max44009::new(dev, address);
-//! # }
 //! ```
 //!
 //! ### Enable interruptions and see if one has happened
 //!
 //! ```no_run
-//! extern crate linux_embedded_hal as hal;
-//! extern crate max44009;
-//!
-//! use hal::I2cdev;
+//! use linux_embedded_hal::I2cdev;
 //! use max44009::{ Max44009, SlaveAddr };
 //!
-//! # fn main() {
 //! let dev = I2cdev::new("/dev/i2c-1").unwrap();
 //! let mut sensor = Max44009::new(dev, SlaveAddr::default());
 //! sensor.enable_interrupt().unwrap();
 //! if sensor.has_interrupt_happened().unwrap() {
-//!     println!("Interrupt happened.")
+//!     println!("Interrupt happened.");
 //! }
-//! # }
 //! ```
 //!
 //! ### Set the measurement mode to continuous
 //!
 //! ```no_run
-//! extern crate linux_embedded_hal as hal;
-//! extern crate max44009;
-//!
-//! use hal::I2cdev;
+//! use linux_embedded_hal::I2cdev;
 //! use max44009::{ Max44009, SlaveAddr, MeasurementMode };
 //!
-//! # fn main() {
 //! let dev = I2cdev::new("/dev/i2c-1").unwrap();
 //! let mut sensor = Max44009::new(dev, SlaveAddr::default());
 //! sensor.set_measurement_mode(MeasurementMode::Continuous).unwrap();
-//! # }
 //! ```
 //!
 //! ### Read the parameters selected in automatic mode
 //!
 //! ```no_run
-//! extern crate linux_embedded_hal as hal;
-//! extern crate max44009;
-//!
-//! use hal::I2cdev;
+//! use linux_embedded_hal::I2cdev;
 //! use max44009::{ Max44009, SlaveAddr };
 //!
-//! # fn main() {
 //! let dev = I2cdev::new("/dev/i2c-1").unwrap();
 //! let mut sensor = Max44009::new(dev, SlaveAddr::default());
 //! let it  = sensor.read_integration_time().unwrap();
 //! let cdr = sensor.read_current_division_ratio().unwrap();
-//! # }
 //! ```
 //!
 //! ### Configure manually
@@ -136,20 +111,15 @@
 //! - Set integration time to 100ms.
 //!
 //! ```no_run
-//! extern crate linux_embedded_hal as hal;
-//! extern crate max44009;
-//!
-//! use hal::I2cdev;
+//! use linux_embedded_hal::I2cdev;
 //! use max44009::{ Max44009, SlaveAddr, ConfigurationMode,
 //!                 CurrentDivisionRatio, IntegrationTime };
 //!
-//! # fn main() {
 //! let dev = I2cdev::new("/dev/i2c-1").unwrap();
 //! let mut sensor = Max44009::new(dev, SlaveAddr::default());
 //! sensor.set_configuration_mode(ConfigurationMode::Manual).unwrap();
 //! sensor.set_current_division_ratio(CurrentDivisionRatio::OneEighth).unwrap();
 //! sensor.set_integration_time(IntegrationTime::_100ms).unwrap();
-//! # }
 //! ```
 //!
 
@@ -157,8 +127,7 @@
 #![deny(missing_docs)]
 #![no_std]
 
-extern crate embedded_hal as hal;
-use hal::blocking::i2c;
+use embedded_hal::blocking::i2c;
 
 /// All possible errors in this crate
 #[derive(Debug)]

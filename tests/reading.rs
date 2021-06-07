@@ -1,10 +1,7 @@
-extern crate embedded_hal_mock as hal;
-extern crate max44009;
-use hal::i2c::Transaction as I2cTrans;
+use embedded_hal_mock::i2c::Transaction as I2cTrans;
 use max44009::{CurrentDivisionRatio as CDR, IntegrationTime as IT};
-
 mod common;
-use common::{destroy, new, Register, DEV_BASE_ADDR};
+use crate::common::{destroy, new, Register, DEV_BASE_ADDR};
 
 #[test]
 fn can_read_interrupt_did_not_happened() {

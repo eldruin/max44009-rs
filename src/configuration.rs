@@ -1,9 +1,8 @@
-extern crate embedded_hal as hal;
-use super::{
+use crate::{
     BitFlags, ConfigurationMode, CurrentDivisionRatio, Error, IntegrationTime, Max44009,
     MeasurementMode, Register,
 };
-use hal::blocking::i2c;
+use embedded_hal::blocking::i2c;
 
 impl<I2C, E> Max44009<I2C>
 where
