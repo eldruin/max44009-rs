@@ -1,12 +1,12 @@
-# Rust MAX44009 Ambient Light Sensor
+# Rust MAX44009/MAX44007 Ambient Light Sensor Driver
 
 [![crates.io](https://img.shields.io/crates/v/max44009.svg)](https://crates.io/crates/max44009)
 [![Docs](https://docs.rs/max44009/badge.svg)](https://docs.rs/max44009)
 [![Build Status](https://github.com/eldruin/max44009-rs/workflows/Build/badge.svg)](https://github.com/eldruin/max44009-rs/actions?query=workflow%3ABuild)
 [![Coverage Status](https://coveralls.io/repos/github/eldruin/max44009-rs/badge.svg?branch=master)](https://coveralls.io/github/eldruin/max44009-rs?branch=master)
 
-This is a platform agnostic Rust driver for the MAX44009 ambient
-light sensor, using the [`embedded-hal`] traits.
+This is a platform agnostic Rust driver for the MAX44009 and MAX44007 ambient
+light sensors, using the [`embedded-hal`] traits.
 
 This driver allows you to:
 - Read lux measurement.
@@ -19,11 +19,11 @@ This driver allows you to:
 - Enable/disable interrupt generation.
 - Check if an interrupt has happened.
 
-## The device
-The MAX44009 ambient light sensor features an I2C digital output
+## The devices
+The MAX44009 and MAX44007 ambient light sensor feature an I2C digital output
 that is ideal for a number of portable applications such as
 smartphones, notebooks, and industrial sensors.
-At less than 1μA operating current, it is the lowest power ambient
+At less than 1μA operating current, the MAX44009 is the lowest power ambient
 light sensor in the industry and features an ultra-wide 22-bit
 dynamic range from 0.045 lux to 188,000 lux.
 Low-light operation allows easy operation in dark-glass
@@ -34,8 +34,10 @@ IR and UV blocking capability. The adaptive gain block
 automatically selects the correct lux range to optimize the
 counts/lux.
 
-Datasheet:
-- [MAX44009](https://datasheets.maximintegrated.com/en/ds/MAX44009.pdf)
+Datasheets: [MAX44007], [MAX44009]
+
+[MAX44007]: https://datasheets.maximintegrated.com/en/ds/MAX44007.pdf
+[MAX44009]: https://datasheets.maximintegrated.com/en/ds/MAX44009.pdf
 
 ## Usage
 

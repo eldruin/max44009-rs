@@ -1,5 +1,5 @@
-//! This is a platform agnostic Rust driver for the MAX44009 ambient
-//! light sensor, based on the [`embedded-hal`] traits.
+//! This is a platform agnostic Rust driver for the MAX44009 and MAX44007 ambient
+//! light sensors (ALS), based on the [`embedded-hal`] traits.
 //!
 //! [`embedded-hal`]: https://github.com/rust-embedded/embedded-hal
 //!
@@ -14,11 +14,11 @@
 //! - Enable/disable interrupt generation.
 //! - Check if an interrupt has happened.
 //!
-//! ## The device
-//! The MAX44009 ambient light sensor features an I2C digital output
+//! ## The devices
+//! The MAX44009 and MAX44007 ambient light sensors feature an I2C digital output
 //! that is ideal for a number of portable applications such as
 //! smartphones, notebooks, and industrial sensors.
-//! At less than 1μA operating current, it is the lowest power ambient
+//! At less than 1μA operating current, the MAX44009 is the lowest power ambient
 //! light sensor in the industry and features an ultra-wide 22-bit
 //! dynamic range from 0.045 lux to 188,000 lux.
 //! Low-light operation allows easy operation in dark-glass
@@ -29,8 +29,10 @@
 //! automatically selects the correct lux range to optimize the
 //! counts/lux.
 //!
-//! Datasheet:
-//! - [MAX44009](https://datasheets.maximintegrated.com/en/ds/MAX44009.pdf)
+//! Datasheets: [MAX44007], [MAX44009]
+//!
+//! [MAX44007]: https://datasheets.maximintegrated.com/en/ds/MAX44007.pdf
+//! [MAX44009]: https://datasheets.maximintegrated.com/en/ds/MAX44009.pdf
 //!
 //! ## Usage examples (see also examples folder)
 //!

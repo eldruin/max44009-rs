@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Reading the current division ratio.
 - Enabling/disabling interrupt generation.
 - Checking if an interrupt has happened.
+- Note about compatibility with MAX44007.
 
 ### Changed
 - [breaking-change] Remove implementing `Default` for `Max44009`.
