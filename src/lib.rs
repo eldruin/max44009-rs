@@ -125,6 +125,7 @@
 //! ```
 //!
 
+#![doc(html_root_url = "https://docs.rs/max44009/0.1.0")]
 #![deny(unsafe_code)]
 #![deny(missing_docs)]
 #![no_std]
